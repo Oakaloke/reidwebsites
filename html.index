@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reid Websites</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #07111f, #0b1d35);
+      font-family: Arial, sans-serif;
+      color: white;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+    }
+
+    .logo {
+      width: 280px;
+      max-width: 85%;
+      margin-bottom: 40px;
+
+      filter: drop-shadow(0px 0px 18px rgba(255,255,255,0.08));
+    }
+
+    h1 {
+      font-size: 58px;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 22px;
+      color: #d2d9e4;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .button {
+      display: inline-block;
+
+      padding: 16px 34px;
+
+      background: white;
+      color: #07111f;
+
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+
+      border-radius: 12px;
+
+      transition: 0.3s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      opacity: 0.92;
+    }
+
+    .footer {
+      margin-top: 60px;
+      font-size: 14px;
+      color: #95a2b8;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <img src="logo.svg" alt="Reid Websites Logo" class="logo">
+
+    <h1>Reid Websites</h1>
+
+    <p>
+      Modern websites, digital solutions, and professional online experiences built for businesses that want to stand out.
+    </p>
+
+    <a href="mailto:hello@reidwebsites.com" class="button">
+      Contact Us
+    </a>
+
+    <div class="footer">
+      © 2026 Reid Websites. All rights reserved.
+    </div>
+
+  </div>
+
+</body>
+
+</html>
