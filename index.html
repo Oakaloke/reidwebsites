@@ -1,110 +1,861 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reid Websites</title>
-
+  <title>REIDWEBSITES — Professional Web Design &amp; Development</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --navy:       #040f21;
+      --navy-mid:   #0d1f3c;
+      --silver:     #b8bcc8;
+      --silver-lt:  #e6e7ea;
+      --gold:       #c9a84c;
+      --gold-hover: #dbbe6a;
+      --off-white:  #f5f7fa;
+      --charcoal:   #1a2a3c;
+      --slate:      #6b7a8d;
+      --white:      #ffffff;
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans:  'Inter', system-ui, sans-serif;
+
+      --header-h:   72px;
+      --radius:     8px;
+      --shadow:     0 4px 24px rgba(4,15,33,0.10);
+      --shadow-lg:  0 16px 48px rgba(4,15,33,0.18);
+      --ease:       all 0.25s ease;
     }
 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #07111f, #0b1d35);
-      font-family: Arial, sans-serif;
-      color: white;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      text-align: center;
-      padding: 20px;
-    }
-
-    .container {
-      max-width: 800px;
-    }
-
-    .logo {
-      width: 280px;
-      max-width: 85%;
-      margin-bottom: 40px;
-
-      filter: drop-shadow(0px 0px 18px rgba(255,255,255,0.08));
-    }
-
-    h1 {
-      font-size: 58px;
-      margin-bottom: 18px;
-      letter-spacing: 1px;
-    }
-
-    p {
-      font-size: 22px;
-      color: #d2d9e4;
+      font-family: var(--font-sans);
+      color: var(--charcoal);
+      background: var(--white);
       line-height: 1.6;
-      margin-bottom: 40px;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ──────────────────────────── */
+
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: var(--navy);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      transition: box-shadow 0.3s ease;
+    }
+    #header.scrolled {
+      box-shadow: 0 2px 24px rgba(0,0,0,0.45);
     }
 
-    .button {
-      display: inline-block;
-      padding: 16px 34px;
+    .header-logo {
+      height: 46px;
+      width: auto;
+    }
 
-      background: white;
-      color: #07111f;
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--silver-lt);
+      transition: var(--ease);
+    }
+    .nav-links a:hover { color: var(--gold); }
 
-      text-decoration: none;
-      font-size: 18px;
-      font-weight: bold;
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--silver-lt);
+      transition: var(--ease);
+    }
 
+    @media (max-width: 640px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--header-h);
+        left: 0; right: 0;
+        background: var(--navy-mid);
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-bottom: 1px solid rgba(184,188,200,0.1); }
+      .nav-links a { display: block; padding: 1rem 6%; font-size: 1rem; }
+    }
+
+    /* ── SHARED ──────────────────────────── */
+
+    section { padding: 100px 6%; }
+
+    .container { max-width: 1160px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.875rem;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.5vw, 2.875rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 1.25rem;
+    }
+    .section-sub {
+      font-size: 1.0625rem;
+      color: var(--slate);
+      line-height: 1.75;
+      max-width: 520px;
+    }
+    .section-header { margin-bottom: 3.75rem; }
+
+    /* ── BUTTONS ─────────────────────────── */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2.125rem;
+      border-radius: var(--radius);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--ease);
+      border: none;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .btn-gold:hover {
+      background: var(--gold-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201,168,76,0.38);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--silver-lt);
+      border: 1px solid rgba(184,188,200,0.5);
+    }
+    .btn-outline:hover {
+      background: rgba(184,188,200,0.08);
+      border-color: var(--silver-lt);
+      transform: translateY(-2px);
+    }
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .btn-navy:hover {
+      background: var(--navy-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(4,15,33,0.28);
+    }
+    .btn-block { width: 100%; justify-content: center; }
+
+    /* ── HERO ────────────────────────────── */
+
+    #home {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 6%;
+      padding-top: var(--header-h);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* decorative rings */
+    #home::before,
+    #home::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      border: 1px solid rgba(184,188,200,0.07);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #home::before { width: 680px; height: 680px; }
+    #home::after  { width: 420px; height: 420px; }
+
+    .hero-inner {
+      max-width: 840px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-logo {
+      width: clamp(170px, 28vw, 320px);
+      height: auto;
+      margin: 0 auto 2rem;
+      display: block;
+      filter: drop-shadow(0 8px 32px rgba(201,168,76,0.18));
+    }
+    .hero-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 6.5vw, 5.25rem);
+      font-weight: 600;
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--silver-lt);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.1875rem);
+      color: var(--silver);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(184,188,200,0.5);
+      font-size: 0.625rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(184,188,200,0.5), transparent);
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ── SERVICES ────────────────────────── */
+
+    #services { background: var(--off-white); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .pricing-grid { grid-template-columns: 1fr; } }
+
+    .pricing-card {
+      background: var(--white);
       border-radius: 12px;
+      padding: 2.5rem 2rem 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(184,188,200,0.2);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .pricing-card.featured {
+      background: var(--navy);
+      border: 2px solid var(--gold);
+    }
+    .pricing-card.featured .pricing-name  { color: var(--silver); }
+    .pricing-card.featured .pricing-price { color: var(--white); }
+    .pricing-card.featured .pricing-desc  { color: var(--silver); border-color: rgba(184,188,200,0.15); }
+    .pricing-card.featured .feature-item  { color: var(--silver-lt); }
 
-      transition: 0.3s ease;
+    .badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.3rem 1.1rem;
+      border-radius: 20px;
+      white-space: nowrap;
     }
 
-    .button:hover {
-      transform: translateY(-3px);
-      opacity: 0.92;
+    .pricing-name {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 0.875rem;
+    }
+    .pricing-price {
+      font-family: var(--font-serif);
+      font-size: 3.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .pricing-price sup {
+      font-size: 1.375rem;
+      font-weight: 400;
+      vertical-align: super;
+    }
+    .pricing-price.custom-price {
+      font-size: 2.25rem;
+      padding-top: 0.35rem;
+    }
+    .pricing-desc {
+      font-size: 0.875rem;
+      color: var(--slate);
+      line-height: 1.6;
+      margin: 1.25rem 0;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--silver-lt);
+    }
+    .feature-list {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+    .feature-item {
+      font-size: 0.875rem;
+      color: var(--charcoal);
+      padding: 0.4rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+    .feature-item::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
     }
 
-    .footer {
-      margin-top: 60px;
-      font-size: 14px;
-      color: #95a2b8;
+    /* ── PORTFOLIO ───────────────────────── */
+
+    #portfolio { background: var(--white); }
+
+    .section-header-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3.5rem;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
 
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+    @media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 540px) { .portfolio-grid { grid-template-columns: 1fr; } }
+
+    .portfolio-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(184,188,200,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      background: var(--white);
+    }
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    .portfolio-card:hover .thumb-overlay { opacity: 1; }
+
+    .portfolio-thumb {
+      aspect-ratio: 16/10;
+      position: relative;
+      overflow: hidden;
+    }
+    .thumb-fill { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(4,15,33,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .thumb-icon {
+      width: 40px;
+      height: 40px;
+      opacity: 0.18;
+    }
+
+    .t1 { background: linear-gradient(135deg, #040f21 0%, #163d62 100%); }
+    .t2 { background: linear-gradient(135deg, #101830 0%, #243050 100%); }
+    .t3 { background: linear-gradient(135deg, #0a1a2e 0%, #1a2e44 100%); }
+    .t4 { background: linear-gradient(135deg, #1a1a2e 0%, #2e2e4a 100%); }
+    .t5 { background: linear-gradient(135deg, #0a2218 0%, #164030 100%); }
+    .t6 { background: linear-gradient(135deg, #281808 0%, #402818 100%); }
+
+    .portfolio-info { padding: 1.25rem 1.5rem 1.5rem; }
+    .portfolio-tags { display: flex; gap: 0.375rem; flex-wrap: wrap; margin-bottom: 0.55rem; }
+    .tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,168,76,0.1);
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+    }
+    .portfolio-title {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.3rem;
+    }
+    .portfolio-meta { font-size: 0.8125rem; color: var(--slate); }
+
+    /* ── FOOTER ──────────────────────────── */
+
+    footer {
+      background: var(--navy);
+      padding: 5rem 6% 2.5rem;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 3rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(184,188,200,0.1);
+      flex-wrap: wrap;
+    }
+    .footer-brand { max-width: 300px; }
+    .footer-logo { height: 52px; width: auto; margin-bottom: 1.25rem; }
+    .footer-rule { width: 36px; height: 2px; background: var(--gold); margin-bottom: 1.25rem; }
+    .footer-tagline { font-size: 0.875rem; color: var(--silver); line-height: 1.65; }
+
+    .footer-col h4 {
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer-col a { font-size: 0.875rem; color: var(--silver); transition: var(--ease); }
+    .footer-col a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy { font-size: 0.8rem; color: var(--slate); }
+
+    /* ── RESPONSIVE ──────────────────────── */
+
+    /* — Phones: up to 743px — */
+    @media (max-width: 743px) {
+      section { padding: 72px 5%; }
+      .section-title { font-size: 1.875rem; }
+      .hero-title { font-size: 2.5rem; }
+      .hero-logo { width: 185px; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2.1rem; }
+      .hero-logo { width: 155px; }
+    }
+
+    /* — iPad portrait: 768px – 1023px —
+       Override the max-width:900px 2-col rules to restore the
+       desktop 3-col feel the user asked for.                    */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      section { padding: 88px 6%; }
+
+      .hero-logo {
+        width: clamp(270px, 35vw, 320px);
+        margin-bottom: 2.25rem;
+      }
+      .hero-title { font-size: clamp(3.5rem, 7vw, 4.5rem); }
+      .hero-sub   { font-size: 1.1rem; }
+
+      /* 3-col grids with tighter spacing to match desktop */
+      .pricing-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.125rem;
+      }
+      .pricing-card { padding: 2rem 1.375rem 1.75rem; }
+      .pricing-price { font-size: 2.625rem; }
+      .pricing-price.custom-price { font-size: 1.875rem; }
+
+      .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+      }
+      .portfolio-info { padding: 1rem 1.125rem 1.25rem; }
+      .portfolio-title { font-size: 1rem; }
+
+      /* footer cols sit comfortably side-by-side */
+      .footer-brand { max-width: 240px; }
+    }
+
+    /* — iPad landscape: 1024px – 1200px — */
+    @media (min-width: 1024px) and (max-width: 1200px) {
+      section { padding: 88px 5%; }
+      .pricing-card { padding: 2.25rem 1.625rem 2rem; }
+      .portfolio-grid { gap: 1.5rem; }
+    }
+
+    /* — Touch devices (iPad, iPhone): always show a hint on
+       portfolio thumbnails since hover doesn't exist on touch — */
+    @media (hover: none) and (pointer: coarse) {
+      .thumb-overlay { opacity: 0.6; }
+      .portfolio-card:active .thumb-overlay { opacity: 1; }
+    }
   </style>
 </head>
-
 <body>
 
-  <div class="container">
-
-    <img src="reid_websites_exact_svg.svg" alt="Reid Websites Logo" class="logo">
-
-    <h1>Reid Websites</h1>
-
-    <p>
-      Modern websites, digital solutions, and professional online experiences built for businesses that want to stand out.
-    </p>
-
-    <a href="mailto:hello@reidwebsites.com" class="button">
-      Contact Us
+  <!-- HEADER -->
+  <header id="header">
+    <a href="#home">
+      <img src="reid_websites_exact_svg.svg" alt="REIDWEBSITES" class="header-logo">
     </a>
+    <nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div class="footer">
-      © 2026 Reid Websites. All rights reserved.
+
+  <!-- ── HERO ──────────────────────────── -->
+  <section id="home">
+    <div class="hero-inner">
+      <img src="reid_websites_exact_svg.svg" alt="REIDWEBSITES" class="hero-logo">
+      <p class="hero-label">Web Design &amp; Development</p>
+      <h1 class="hero-title">
+        Modern Websites.<br>
+        <em>Built to Convert.</em>
+      </h1>
+      <p class="hero-sub">
+        Custom web design and development for businesses ready to make a lasting impression online. Fast, responsive, and built to grow with you.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-gold">View Packages</a>
+        <a href="#portfolio" class="btn btn-outline">See My Work</a>
+      </div>
     </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
 
-  </div>
+
+  <!-- ── SERVICES ──────────────────────── -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Packages &amp; Pricing</p>
+        <h2 class="section-title">Website Solutions<br>for Every Stage</h2>
+        <p class="section-sub">Transparent pricing, no surprises. Every package includes a clean, custom design built to represent your brand at its best.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- Starter -->
+        <div class="pricing-card">
+          <p class="pricing-name">Starter</p>
+          <div class="pricing-price"><sup>$</sup>1,200</div>
+          <p class="pricing-desc">Perfect for small businesses, freelancers, and personal brands launching their first professional site.</p>
+          <ul class="feature-list">
+            <li class="feature-item">Up to 5 pages</li>
+            <li class="feature-item">Mobile-responsive design</li>
+            <li class="feature-item">Contact form</li>
+            <li class="feature-item">Basic SEO setup</li>
+            <li class="feature-item">1 round of revisions</li>
+            <li class="feature-item">Delivered in 2–3 weeks</li>
+          </ul>
+          <a href="mailto:hello@reidwebsites.com" class="btn btn-navy btn-block">Get Started</a>
+        </div>
+
+        <!-- Professional (featured) -->
+        <div class="pricing-card featured">
+          <div class="badge">Most Popular</div>
+          <p class="pricing-name">Professional</p>
+          <div class="pricing-price"><sup>$</sup>2,800</div>
+          <p class="pricing-desc">A full custom site built to convert — ideal for growing businesses that need to stand out and scale.</p>
+          <ul class="feature-list">
+            <li class="feature-item">Up to 10 pages</li>
+            <li class="feature-item">Custom design from scratch</li>
+            <li class="feature-item">Blog or news section</li>
+            <li class="feature-item">On-page SEO optimization</li>
+            <li class="feature-item">Google Analytics setup</li>
+            <li class="feature-item">2 rounds of revisions</li>
+            <li class="feature-item">30-day post-launch support</li>
+          </ul>
+          <a href="mailto:hello@reidwebsites.com" class="btn btn-gold btn-block">Get Started</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="pricing-card">
+          <p class="pricing-name">Premium</p>
+          <div class="pricing-price custom-price">Custom</div>
+          <p class="pricing-desc">E-commerce, web applications, and large custom builds. Scope and timeline tailored to your project.</p>
+          <ul class="feature-list">
+            <li class="feature-item">Unlimited pages</li>
+            <li class="feature-item">E-commerce / CMS integration</li>
+            <li class="feature-item">Custom functionality</li>
+            <li class="feature-item">Performance optimization</li>
+            <li class="feature-item">Advanced SEO strategy</li>
+            <li class="feature-item">Unlimited revisions</li>
+            <li class="feature-item">90-day post-launch support</li>
+          </ul>
+          <a href="mailto:hello@reidwebsites.com" class="btn btn-navy btn-block">Let's Talk</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── PORTFOLIO ─────────────────────── -->
+  <section id="portfolio">
+    <div class="container">
+      <div class="section-header-row">
+        <div>
+          <p class="section-label">Recent Work</p>
+          <h2 class="section-title" style="margin-bottom:0">Portfolio</h2>
+        </div>
+        <p class="section-sub" style="max-width:320px; font-size:0.9375rem">
+          A selection of projects across industries — more coming soon.
+        </p>
+      </div>
+
+      <div class="portfolio-grid">
+
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">
+            <div class="thumb-fill t1">
+              <svg class="thumb-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+            </div>
+            <div class="thumb-overlay">View Project →</div>
+          </div>
+          <div class="portfolio-info">
+            <div class="portfolio-tags"><span class="tag">E-Commerce</span><span class="tag">Shopify</span></div>
+            <h3 class="portfolio-title">Boutique Online Store</h3>
+            <p class="portfolio-meta">Coming soon</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">
+            <div class="thumb-fill t2">
+              <svg class="thumb-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <div class="thumb-overlay">View Project →</div>
+          </div>
+          <div class="portfolio-info">
+            <div class="portfolio-tags"><span class="tag">Restaurant</span><span class="tag">WordPress</span></div>
+            <h3 class="portfolio-title">Restaurant &amp; Menu Site</h3>
+            <p class="portfolio-meta">Coming soon</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">
+            <div class="thumb-fill t3">
+              <svg class="thumb-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="thumb-overlay">View Project →</div>
+          </div>
+          <div class="portfolio-info">
+            <div class="portfolio-tags"><span class="tag">Professional</span><span class="tag">Custom HTML</span></div>
+            <h3 class="portfolio-title">Law Firm Website</h3>
+            <p class="portfolio-meta">Coming soon</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">
+            <div class="thumb-fill t4">
+              <svg class="thumb-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M9 22V12h6v10"/></svg>
+            </div>
+            <div class="thumb-overlay">View Project →</div>
+          </div>
+          <div class="portfolio-info">
+            <div class="portfolio-tags"><span class="tag">Real Estate</span><span class="tag">Custom</span></div>
+            <h3 class="portfolio-title">Real Estate Agency</h3>
+            <p class="portfolio-meta">Coming soon</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">
+            <div class="thumb-fill t5">
+              <svg class="thumb-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            </div>
+            <div class="thumb-overlay">View Project →</div>
+          </div>
+          <div class="portfolio-info">
+            <div class="portfolio-tags"><span class="tag">Fitness</span><span class="tag">Booking</span></div>
+            <h3 class="portfolio-title">Fitness &amp; Wellness Brand</h3>
+            <p class="portfolio-meta">Coming soon</p>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-thumb">
+            <div class="thumb-fill t6">
+              <svg class="thumb-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="thumb-overlay">View Project →</div>
+          </div>
+          <div class="portfolio-info">
+            <div class="portfolio-tags"><span class="tag">Local Business</span><span class="tag">SEO</span></div>
+            <h3 class="portfolio-title">Local Services Company</h3>
+            <p class="portfolio-meta">Coming soon</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── FOOTER ─────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <img src="reid_websites_exact_svg.svg" alt="REIDWEBSITES" class="footer-logo">
+          <div class="footer-rule"></div>
+          <p class="footer-tagline">Custom web design and development that makes your business stand out online.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:hello@reidwebsites.com">hello@reidwebsites.com</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 REIDWEBSITES. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    const toggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => navLinks.classList.remove('open'))
+    );
+  </script>
 
 </body>
-
 </html>
